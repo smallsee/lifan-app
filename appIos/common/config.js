@@ -20,9 +20,9 @@ module.exports = {
       audio: 'https://api.cloudinary.com/v1_1/supersea/raw/upload'
     },
     api:{
-        base:'http://localhost:1234/',
-        //base:'http://rap.taobao.org/mockjs/7899/',
-        creations: 'api/creations',
+        //base:'http://localhost:1234/',
+        base:'http://rap.taobao.org/mockjs/7899/',
+        creations: 'api/lifan/creations',
         up:'api/up',
         video:'api/creations/video',
         comment:'api/comments',

@@ -11,7 +11,7 @@ var StyleSheet = React.StyleSheet;
 var Text = React.Text;
 var View = React.View;
 var TabBarIOS = React.TabBarIOS;
-
+var Navigator = React.Navigator;
 var Index = require('./appIos/index/index');
 var Move = require('./appIos/moves/move');
 var User = require('./appIos/users/user');
@@ -19,7 +19,7 @@ var User = require('./appIos/users/user');
 var lifan = React.createClass({
     getInitialState: function() {
       return {
-          selectedTab: 'index',
+          selectedTab: 'move',
         };
     },
 
@@ -38,7 +38,21 @@ var lifan = React.createClass({
                     selectedTab: 'index',
                   });
               }}>
-            <Index />
+          <Navigator
+            initialRoute={{
+              name:'index', //主要路由名称
+              component:Index //模板 也就是列表页所导出的模板,name是用来后面调用的时候用的
+            }}
+            configureScene={(route)=>{
+              //切换页面的时候的样式
+              return Navigator.SceneConfigs.FloatFromRight
+            }}
+            renderScene={(route,navigator)=>{
+              var Component = route.component
+              //切换页面的时候想传递的参数
+              return <Component {...route.params} navigator={navigator}/>
+            }}
+            />
         </Icon.TabBarItem>
           <Icon.TabBarItem
                renderAsOriginal = {true}

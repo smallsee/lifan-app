@@ -10,8 +10,6 @@ request.get = function(url,params){
     if (params){
         url += '?' + quertString.stringify(params)
     }
-
-
     return fetch(url)
         .then((response) => response.json())
         .then((response) => Mock.mock(response))

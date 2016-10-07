@@ -22,7 +22,7 @@ module.exports = {
     api:{
         base:'http://localhost:1234/',
         //base:'http://rap.taobao.org/mockjs/7899/',
-        creations: 'api/creations',
+        creations: 'api/lifan/creations',
         up:'api/up',
         video:'api/creations/video',
         comment:'api/comments',
