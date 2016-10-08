@@ -246,14 +246,13 @@ var Index = React.createClass({
           <Text style={styles.headerTitle}>列表页面</Text>
         </View>
         <ListView
+
           dataSource={this.state.dataSource}  //获取数据
           renderRow={this._renderRow} //讲获取的数据填充到视图中
-
           onEndReachedThreshold={20}            //调用onEndReached之前的临界值，单位是像素。
-          showsVerticalScrollIndicator = {true} //是否显示进度条
+          showsVerticalScrollIndicator = {false} //是否显示进度条
           enableEmptySections = {true} //不需要空白的位置
           automaticallyAdjustContentInsets={false} //自动调整内容
-
           onEndReached={this._fetchMoreData}   //当所有的数据都已经渲染过，
           // 并且列表被滚动到距离最底部不足onEndReachedThreshold个像素的距离时调用
           renderFooter={this._renderFooter}   //到达底部时渲染 下拉事件

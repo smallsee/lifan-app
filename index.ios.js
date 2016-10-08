@@ -15,11 +15,12 @@ var Navigator = React.Navigator;
 var Index = require('./appIos/index/index');
 var Move = require('./appIos/moves/move');
 var User = require('./appIos/users/user');
+var Book = require('./appIos/books/book');
 
 var lifan = React.createClass({
     getInitialState: function() {
       return {
-          selectedTab: 'move',
+          selectedTab: 'user',
         };
     },
 
@@ -64,7 +65,21 @@ var lifan = React.createClass({
                           selectedTab: 'move',
                       });
                 }}>
-              <Move />
+            <Navigator
+              initialRoute={{
+                name:'move', //主要路由名称
+                component:Move //模板 也就是列表页所导出的模板,name是用来后面调用的时候用的
+              }}
+              configureScene={(route)=>{
+                //切换页面的时候的样式
+                return Navigator.SceneConfigs.FloatFromRight
+              }}
+              renderScene={(route,navigator)=>{
+                var Component = route.component
+                //切换页面的时候想传递的参数
+                return <Component {...route.params} navigator={navigator}/>
+              }}
+            />
           </Icon.TabBarItem>
           <Icon.TabBarItem
                renderAsOriginal = {true}
@@ -78,7 +93,18 @@ var lifan = React.createClass({
                 }}>
               <User />
           </Icon.TabBarItem>
-
+          <Icon.TabBarItem
+            renderAsOriginal = {true}
+            iconName='ios-more-outline'
+            selectedIconName='ios-more'
+            selected={this.state.selectedTab === 'book'}
+            onPress={() => {
+              this.setState({
+                selectedTab: 'book',
+              });
+            }}>
+            <Book />
+          </Icon.TabBarItem>
 
       </TabBarIOS>
     );

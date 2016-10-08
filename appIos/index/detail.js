@@ -92,7 +92,7 @@ var Detail = React.createClass({
     //读取结束后开始运行
     _onProgress(data){
         console.log(data)
-        console.log('load _onProgress')
+
         //data是获取的数据
         if (!this.state.videoLoaded){
             this.setState({

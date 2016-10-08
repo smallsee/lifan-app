@@ -5,6 +5,7 @@ var Icon = require('react-native-vector-icons/Ionicons');
 
 var request = require('../common/request');
 var config = require('../common/config');
+var Detail = require('./detail');
 
 
 var StyleSheet = React.StyleSheet;
@@ -35,10 +36,11 @@ var Item = React.createClass({
   render (){
     var row = this.state.row;
     return (
-      <TouchableHighlight>
+      <TouchableHighlight onPress={this.props.onSelect}>
         <View style={styles.item}>
           <Image source={{uri: row.thumb}}
-                 style={styles.thumb}>
+                 style={styles.thumb}
+          >
             <Icon name="ios-play" size={20} style={styles.play} />
           </Image>
           <Text style={styles.title}>{row.title}</Text>
@@ -78,8 +80,21 @@ var Move = React.createClass({
   },
   _renderRow(row) {
     return <Item
+      onSelect={()=>this._loadPage(row)}
       key={row._id}
-      row={row} />
+      row={row}
+    />
+  },
+
+  _loadPage(row){
+    console.log(row);
+    this.props.navigator.push({
+      name:'detail',
+      component:Detail,
+      params:{
+        data:row
+      }
+    })
   },
 
   componentDidMount() {
@@ -103,7 +118,7 @@ var Move = React.createClass({
           items = data.data.concat(items);
 
           cacheResults.items = items;
-          console.log(cacheResults);
+
 
           setTimeout(function(){
             that.setState({
@@ -127,7 +142,7 @@ var Move = React.createClass({
             dataSource={this.state.dataSource}  //获取数据
             renderRow={this._renderRow} //讲获取的数据填充到视图中
 
-            showsVerticalScrollIndicator = {true} //是否显示进度条
+            showsVerticalScrollIndicator = {false} //是否显示进度条
 
             onEndReached={this._fetchMoreData}
 
@@ -168,7 +183,7 @@ var Move = React.createClass({
         marginTop:5,
         justifyContent: 'space-around',
         flexDirection: 'row',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
       },
       item:{
         width:(width-30) * 0.5,
